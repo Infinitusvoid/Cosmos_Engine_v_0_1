@@ -13,13 +13,16 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\glad">
+      <UniqueIdentifier>{565f6659-6ac6-4908-b99d-dfd8cccd4dff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Cosmos_Engine_v_0_1.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\OpenGL_Exploring_and_learning\EV_0\glad.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\glad</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
