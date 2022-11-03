@@ -1,14 +1,8 @@
 // OpenGL_Exploring_and_learning.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "Engine.h"
-#include "Mesh.h"
-#include "Mesh_indexed.h"
-#include "Tunel_Builder.h"
-#include "Cam.h"
-#include "Mover.h"
-#include "Shader.h"
 
+#include "Game.h"
 
 namespace Sandbox_
 {
