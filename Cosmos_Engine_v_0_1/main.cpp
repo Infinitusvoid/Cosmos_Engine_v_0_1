@@ -441,55 +441,7 @@ namespace Sandbox_
 
 	}
 
-	namespace Engine_
-	{
-
-		namespace Components_
-		{
-			
-
-			
-
-
-
-			// TODO
-		   // -> exporter obj for mesh
-		   // -> refactur
-			namespace Geometry_
-			{
-
-				
-
-				
-
-
-
-
-
-
-
-
-				
-
-
-
-
-
-
-
-				//--
-			}
-
-
-
-
-
-		}
-
-
-
-	}
-
+	
 	namespace Maps_
 	{
 		namespace Map_0_
