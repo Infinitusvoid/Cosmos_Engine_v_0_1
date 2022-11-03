@@ -6,6 +6,7 @@
 #include "Mesh_indexed.h"
 #include "Tunel_Builder.h"
 #include "Cam.h"
+#include "Mover.h"
 
 namespace Sandbox_
 {
@@ -448,38 +449,7 @@ namespace Sandbox_
 		{
 			namespace Details_
 			{
-				struct Mover
-				{
-					glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
-					glm::vec3 direction = glm::vec3(1.0f, 0.0f, 0.0f);
-					float speed = 1.0f;
-
-					void move()
-					{
-						position += direction * speed;
-					}
-
-
-					void randomize_direction()
-					{
-						float dx = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-						float dy = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-						float dz = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-						direction += glm::vec3(dx - 0.5f, dy - 0.5f, dz - 0.5f) * 0.25f;
-
-						direction = glm::normalize(direction);
-					}
-
-					void jump(glm::vec3 pos)
-					{
-						position = pos;
-					}
-
-					void clear_direction()
-					{
-						direction = glm::vec3(0.0f, 0.0f, 0.0f);
-					}
-				};
+				
 
 				
 				void build_version_000(MeshT_::Mesh& mesh)
