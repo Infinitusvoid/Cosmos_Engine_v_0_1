@@ -45,6 +45,9 @@
     <ClCompile Include="Cam.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tunel_Builder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tunel_Builder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
