@@ -7,6 +7,7 @@
 #include "Cam.h"
 #include "Mover.h"
 #include "Shader.h"
+#include "Texture.h"
 
 namespace Game
 {

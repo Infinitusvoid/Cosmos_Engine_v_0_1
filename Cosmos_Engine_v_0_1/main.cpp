@@ -507,11 +507,11 @@ namespace Sandbox_
 				mesh.create();
 
 
-				Engine::Texture texture_0;
+				Texture texture_0;
 				const char* path_0 = "Textures/container.jpg";
 				texture_0.load_RGB(path_0);
 
-				Engine::Texture texture_1;
+				Texture texture_1;
 				const char* path_1 = "Textures/awesomeface.png";
 				texture_1.load_RGBA(path_1);
 
