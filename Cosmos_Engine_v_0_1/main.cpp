@@ -1,27 +1,9 @@
 // OpenGL_Exploring_and_learning.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+#include "Engine.h"
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include <image/stb_image.h>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
-#include <vector>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-
-#include <numbers>
-#include <deque>
-#include <fstream>
-#include <iostream>
 
 namespace Sandbox_
 {
@@ -599,82 +581,7 @@ namespace Sandbox_
 				glm::vec3 scale;
 			};
 
-			struct Texture
-			{
-				unsigned int texture_ID;
-
-				void load_RGB(const char* path)
-				{
-					glGenTextures(1, &texture_ID);
-					glBindTexture(GL_TEXTURE_2D, texture_ID);
-
-					// set the texture wrapping parameters
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-					// set texture filtering parameters
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-					// load image, create texture and generate mipmaps
-					int width, height, nrChannels;
-					//stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-					unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
-
-					if (data)
-					{
-						glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-						glGenerateMipmap(GL_TEXTURE_2D);
-					}
-					else
-					{
-						std::cout << "Failed to load texture" << std::endl;
-					}
-					stbi_image_free(data);
-				}
-
-				void load_RGBA(const char* path)
-				{
-					// load image, create texture and generate mipmaps
-					int width, height, nrChannels;
-					// ---------
-					glGenTextures(1, &texture_ID);
-					glBindTexture(GL_TEXTURE_2D, texture_ID);
-					// set the texture wrapping parameters
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-					// set texture filtering parameters
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-					// load image, create texture and generate mipmaps
-
-					unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
-					if (data)
-					{
-						// note that the awesomeface.png has transparency and thus an alpha channel, so make sure to tell OpenGL the data type is of GL_RGBA
-						glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-						glGenerateMipmap(GL_TEXTURE_2D);
-					}
-					else
-					{
-						std::cout << "Failed to load texture" << std::endl;
-					}
-					stbi_image_free(data);
-				}
-
-				void bind_to_texture_unit_0()
-				{
-					// bind textures on corresponding texture units
-					glActiveTexture(GL_TEXTURE0);
-					glBindTexture(GL_TEXTURE_2D, texture_ID);
-				}
-
-				void bind_to_texture_unit_1()
-				{
-					glActiveTexture(GL_TEXTURE1);
-					glBindTexture(GL_TEXTURE_2D, texture_ID);
-				}
-			};
+			
 
 
 
@@ -1818,11 +1725,11 @@ namespace Sandbox_
 				mesh.create();
 
 
-				Engine_::Components_::Texture texture_0;
+				Texture texture_0;
 				const char* path_0 = "Textures/container.jpg";
 				texture_0.load_RGB(path_0);
 
-				Engine_::Components_::Texture texture_1;
+				Texture texture_1;
 				const char* path_1 = "Textures/awesomeface.png";
 				texture_1.load_RGBA(path_1);
 
