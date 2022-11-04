@@ -13,9 +13,21 @@ namespace Sandbox_
 	float lastY = Game::SCR_HEIGHT / 2.0f;
 	bool firstMouse = true;
 
-	// timing
-	float deltaTime = 0.0f;	// time between current frame and last frame
-	float lastFrame = 0.0f;
+	namespace Time_calc
+	{
+		// timing
+		float deltaTime = 0.0f;	// time between current frame and last frame
+		float lastFrame = 0.0f;
+
+		void update()
+		{
+			float currentFrame = static_cast<float>(glfwGetTime());
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+		}
+		
+	};
+	
 
 	// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
@@ -25,13 +37,13 @@ namespace Sandbox_
 			glfwSetWindowShouldClose(window, true);
 
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			camera.ProcessKeyboard(Cam_::Camera_Movement::FORWARD, deltaTime);
+			camera.ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Time_calc::deltaTime);
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			camera.ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, deltaTime);
+			camera.ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Time_calc::deltaTime);
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			camera.ProcessKeyboard(Cam_::Camera_Movement::LEFT, deltaTime);
+			camera.ProcessKeyboard(Cam_::Camera_Movement::LEFT, Time_calc::deltaTime);
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			camera.ProcessKeyboard(Cam_::Camera_Movement::RIGHT, deltaTime);
+			camera.ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Time_calc::deltaTime);
 	}
 
 	// glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -385,9 +397,9 @@ namespace Sandbox_
 				{
 					// per-frame time logic
 					// --------------------
-					float currentFrame = static_cast<float>(glfwGetTime());
-					deltaTime = currentFrame - lastFrame;
-					lastFrame = currentFrame;
+					
+					Time_calc::update();
+					
 
 					// input
 					// -----
