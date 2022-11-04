@@ -45,52 +45,7 @@ namespace Sandbox_
 			"}\n";
 	}
 
-	namespace File_utils_
-	{
-		void todo_read_file()
-		{
-			// 1. retrieve the vertex/fragment source code from filePath
-				//std::string vertexCode;
-				//std::string fragmentCode;
-
-				//we don't read from file
-				//std::ifstream vShaderFile;
-				//std::ifstream fShaderFile;
-				//// ensure ifstream objects can throw exceptions:
-				//vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-				//fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-				//try
-				//{
-				//    // open files
-				//    vShaderFile.open(vertexPath);
-				//    fShaderFile.open(fragmentPath);
-				//    std::stringstream vShaderStream, fShaderStream;
-				//    // read file's buffer contents into streams
-				//    vShaderStream << vShaderFile.rdbuf();
-				//    fShaderStream << fShaderFile.rdbuf();
-				//    // close file handlers
-				//    vShaderFile.close();
-				//    fShaderFile.close();
-				//    // convert stream into string
-				//    vertexCode = vShaderStream.str();
-				//    fragmentCode = fShaderStream.str();
-				//}
-				//catch (std::ifstream::failure& e)
-				//{
-				//    std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ: " << e.what() << std::endl;
-				//}
-
-				//const char* vShaderCode = vertexCode.c_str();
-				//const char* fShaderCode = fragmentCode.c_str();
-		}
-
-	}
-
 	
-
-	
-
-
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 	void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
