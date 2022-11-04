@@ -303,30 +303,6 @@ namespace Sandbox_
 				Mesh_indexed_::Mesh_indexed mesh_indexed;
 				Mesh_indexed_::Debug::add_test_quad(mesh_indexed);
 
-
-
-
-				/*for (int i = 0; i < 10; i++)
-				{
-					Engine_::Components_::Geometry_::Mesh_indexed_::add_quad(
-						mesh_indexed,
-						glm::vec3(0 + 20 * i, 0, 0),
-						glm::vec3(0 + 20 * i, 20, 0),
-						glm::vec3(20 + 20 * i, 20, 0),
-						glm::vec3(20 + 20 * i, 0, 0)
-					);
-
-				}*/
-
-
-				
-
-				
-
-
-
-				
-				
 				Game::Models_data_::D_000_::add_verts([&mesh](float x, float y, float z, float u, float v) {
 					mesh.add_vertices(x, y, z, u, v);
 					});
