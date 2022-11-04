@@ -11,6 +11,8 @@
 
 namespace Game
 {
-
+	// settings
+	const unsigned int SCR_WIDTH = 1980;//800;
+	const unsigned int SCR_HEIGHT = 1080;//600;
 }
 
