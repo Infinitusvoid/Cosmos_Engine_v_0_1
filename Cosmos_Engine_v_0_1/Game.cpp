@@ -114,3 +114,22 @@ Shaders_::Shader Game::Shader_source_::create_shader()
 	Shaders_::Shader our_shader(camera_vs, camera_fs);
 	return our_shader;
 }
+
+namespace Game::Time_calc
+{
+	// timing
+	float deltaTime = 0.0f;	// time between current frame and last frame
+	float lastFrame = 0.0f;
+
+	void update()
+	{
+		float currentFrame = static_cast<float>(glfwGetTime());
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+	}
+
+	float get_delta_time()
+	{
+		return deltaTime;
+	}
+}
