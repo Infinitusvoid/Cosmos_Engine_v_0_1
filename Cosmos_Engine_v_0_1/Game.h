@@ -30,5 +30,11 @@ namespace Game
 
 	}
 
+	namespace Shader_source_
+	{
+		Shaders_::Shader create_shader();
+	}
+
+
 }
 
