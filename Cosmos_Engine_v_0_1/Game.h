@@ -42,5 +42,14 @@ namespace Game
 
 	};
 
+
+	namespace Last_mouse_XY
+	{
+		void update(double xposIn, double yposIn);
+		
+		float get_x_offset();
+		
+		float get_y_offset();
+	}
 }
 
