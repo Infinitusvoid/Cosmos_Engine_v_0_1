@@ -5,15 +5,52 @@
 #include "Game.h"
 
 
-namespace Sandbox_
+namespace Last_mouse_XY
 {
-	// camera
-	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 	float lastX = Game::SCR_WIDTH / 2.0f;
 	float lastY = Game::SCR_HEIGHT / 2.0f;
 	bool firstMouse = true;
 
+	float xoffset = 0.0f;
+	float yoffset = 0.0f;
+
+	void update(double xposIn, double yposIn)
+	{
+		float xpos = static_cast<float>(xposIn);
+		float ypos = static_cast<float>(yposIn);
+
+		if (firstMouse)
+		{
+			lastX = xpos;
+			lastY = ypos;
+			firstMouse = false;
+		}
+
+		xoffset = xpos - lastX;
+		yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+		lastX = xpos;
+		lastY = ypos;
+	}
+
+	float get_x_offset()
+	{
+		return xoffset;
+	}
+
+	float get_y_offset()
+	{
+		return yoffset;
+	}
+}
+
+namespace Sandbox_
+{
+	// camera
+	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 	
+
+		
 	
 
 	// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
@@ -48,23 +85,9 @@ namespace Sandbox_
 	// -------------------------------------------------------
 	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 	{
-		float xpos = static_cast<float>(xposIn);
-		float ypos = static_cast<float>(yposIn);
+		Last_mouse_XY::update(xposIn, yposIn);
 
-		if (firstMouse)
-		{
-			lastX = xpos;
-			lastY = ypos;
-			firstMouse = false;
-		}
-
-		float xoffset = xpos - lastX;
-		float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-		lastX = xpos;
-		lastY = ypos;
-
-		camera.ProcessMouseMovement(xoffset, yoffset);
+		camera.ProcessMouseMovement(Last_mouse_XY::get_x_offset(), Last_mouse_XY::get_y_offset());
 	}
 
 	// glfw: whenever the mouse scroll wheel scrolls, this callback is called
