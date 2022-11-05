@@ -41,6 +41,13 @@ namespace Engine
 	// camera
 	Cam_::Camera* get_cam();
 	
+	namespace Models_data_
+	{
+		void add_verts(std::function<void(float, float, float, float, float)> f);
+	}
+	
+
+
 
 	namespace Time_calc
 	{
