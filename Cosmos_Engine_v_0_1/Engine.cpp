@@ -237,13 +237,13 @@ namespace Engine
 		
 		//TODO
 
-		struct Tunel_Builder
+		struct TTunel_Builder
 		{
-			void build_version_002(Mesh_indexed_::Mesh_indexed& mesh_indexed, int seed)
+			void build(Mesh_indexed_::Mesh_indexed& mesh_indexed)
 			{
 
 
-				auto rnd_position_around = [&seed](glm::vec3 center, float radius)
+				auto rnd_position_around = [](glm::vec3 center, float radius)
 				{
 					float x = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 					float y = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -311,6 +311,13 @@ namespace Engine
 
 			const int max_elements = 10;
 
+			TTunel_Builder builder_t;
+
+			Tunel_Manager()
+			{
+
+			}
+
 			bool is_time_to_update()
 			{
 				return (Time_Singelton::get_total_delta_time() - last_time_it_was_generated) > time_between_update;
@@ -331,7 +338,7 @@ namespace Engine
 					q_meshes.push_back(Mesh_indexed_::Mesh_indexed());
 					Mesh_indexed_::Debug::add_test_quad(q_meshes.back());
 					cycle += 1;
-					Engine::Build_versions::build_version_002(q_meshes.back(), cycle); //now i need the new one of  this that it contine building where it stoped
+					builder_t.build(q_meshes.back());//Engine::Build_versions::build_version_002(q_meshes.back(), cycle); //now i need the new one of  this that it contine building where it stoped
 					q_meshes.back().create();
 				}
 				else {
