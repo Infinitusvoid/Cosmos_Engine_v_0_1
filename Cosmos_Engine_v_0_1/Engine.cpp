@@ -3,24 +3,19 @@
 #include "Time_Singelton.h"
 
 #include <memory>
+
 #include "Change_XY.h"
 
-namespace Engine_Data
-{
-	struct Engine_components
-	{
-		Mesh_indexed_::Mesh_indexed mesh;
-		Shaders_::Shader shader;
-		Cam_::Camera camera;
-	};
 
-}
 
 
 namespace Engine
 {
-	
-	std::unique_ptr<Engine_Data::Engine_components> components;
+
+	//engine components
+	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+	Change_XY change_xy(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f);
+
 
 
 	Shaders_::Shader Default_shaders::create_default_shader()
@@ -205,8 +200,7 @@ namespace Engine
 
 	}
 
-	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-	Change_XY change_xy(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f);
+	
 	
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	{
