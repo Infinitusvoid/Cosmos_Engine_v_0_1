@@ -41,50 +41,12 @@
 namespace Engine
 {
 
-	
-
-	//void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
-	//void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-	//void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
-
-	
-
 	//engine components
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 	Change_XY change_xy(Constants::SCR_WIDTH / 2.0f, Constants::SCR_HEIGHT / 2.0f);
 	Shaders_::Shader create_default_shader()
 	{
-		const char* camera_fs = "#version 330 core\n"
-			"out vec4 FragColor;\n"
-			"\n"
-			"in vec2 TexCoord;\n"
-			"\n"
-			"uniform sampler2D texture1;\n"
-			"uniform sampler2D texture2;\n"
-			"\n"
-			"void main()\n"
-			"{\n"
-			"FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);\n"
-			"}\n";
-
-
-		const char* camera_vs = "#version 330 core\n"
-			"layout (location = 0) in vec3 aPos;\n"
-			"layout (location = 1) in vec2 aTexCoord;\n"
-			"\n"
-			"out vec2 TexCoord;\n"
-			"\n"
-			"uniform mat4 model;\n"
-			"uniform mat4 view;\n"
-			"uniform mat4 projection;\n"
-			"\n"
-			"void main()\n"
-			"{\n"
-			" gl_Position = projection * view * model * vec4(aPos, 1.0f);\n"
-			" TexCoord = vec2(aTexCoord.x, aTexCoord.y);\n"
-			"}\n";
-
-		Shaders_::Shader our_shader(camera_vs, camera_fs);
+		Shaders_::Shader our_shader(Constants::Shader_Default::camera_vs, Constants::Shader_Default::camera_fs);
 		return our_shader;
 	}
 
@@ -236,82 +198,6 @@ namespace Engine
 	}
 	
 
-	namespace Models_data_
-	{
-		void add_verts(std::function<void(float, float, float, float, float)> f)
-		{
-			// set up vertex data (and buffer(s)) and configure vertex attributes
-			// ------------------------------------------------------------------
-			float vertices[] = {
-				-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-				 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-				 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-				 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-				-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-				-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-
-				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-				 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-				 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-				 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-				-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-
-				-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-				-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-				-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-				 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-				 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-				 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-				 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-				 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-				 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-				 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-				 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-				 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-				-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-				-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-
-				-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-				 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-				 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-				 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-				-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-				-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
-			};
-			// world space positions of our cubes
-			glm::vec3 cubePositions[] = {
-				glm::vec3(0.0f,  0.0f,  0.0f),
-				glm::vec3(2.0f,  5.0f, -15.0f),
-				glm::vec3(-1.5f, -2.2f, -2.5f),
-				glm::vec3(-3.8f, -2.0f, -12.3f),
-				glm::vec3(2.4f, -0.4f, -3.5f),
-				glm::vec3(-1.7f,  3.0f, -7.5f),
-				glm::vec3(1.3f, -2.0f, -2.5f),
-				glm::vec3(1.5f,  2.0f, -2.5f),
-				glm::vec3(1.5f,  0.2f, -1.5f),
-				glm::vec3(-1.3f,  1.0f, -1.5f)
-			};
-
-
-			for (int i = 0; i < 36; i++)
-			{
-				float x = vertices[i * 5 + 0];//x
-				float y = vertices[i * 5 + 1];//y
-				float z = vertices[i * 5 + 2];//z
-
-				float u = vertices[i * 5 + 3];//u
-				float v = vertices[i * 5 + 4];//v
-				f(x, y, z, u, y);
-			}
-		}
-	}
 	
 
 	
@@ -369,7 +255,7 @@ namespace Engine
 			Mesh_indexed_::Mesh_indexed mesh_indexed;
 			Mesh_indexed_::Debug::add_test_quad(mesh_indexed);
 
-			Engine::Models_data_::add_verts([&mesh](float x, float y, float z, float u, float v) {
+			Constants::Default_Cube_Vertices::add_verts([&mesh](float x, float y, float z, float u, float v) {
 				mesh.add_vertices(x, y, z, u, v);
 				});
 
