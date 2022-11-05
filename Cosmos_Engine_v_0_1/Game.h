@@ -110,5 +110,10 @@ namespace Game
 			void map_0(Game::Win_::Window& window);
 		}
 	}
+
+	namespace Sandbox_
+	{
+		void run();
+	}
 }
 
