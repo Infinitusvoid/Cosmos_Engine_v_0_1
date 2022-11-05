@@ -44,15 +44,8 @@ namespace Engine
 		Shaders_::Shader create_default_shader();
 	}
 
-
-	namespace Build_versions
-	{
-		void build_version_000(MeshT_::Mesh& mesh);
-
-		void build_version_001(MeshT_::Mesh& mesh);
-
-		void build_version_002(Mesh_indexed_::Mesh_indexed& mesh_indexed);
-	}
+	
+	
 
 	namespace Win_
 	{
