@@ -4,6 +4,23 @@
 
 namespace Engine
 {
+	namespace Time_calc
+	{
+		// timing
+		float deltaTime = 0.0f;	// time between current frame and last frame
+		float lastFrame = 0.0f;
 
+		void update()
+		{
+			float currentFrame = static_cast<float>(glfwGetTime());
+			deltaTime = currentFrame - lastFrame;
+			lastFrame = currentFrame;
+		}
+
+		float get_delta_time()
+		{
+			return deltaTime;
+		}
+	}
 	
 }

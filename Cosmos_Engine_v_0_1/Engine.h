@@ -36,5 +36,11 @@ namespace Engine
 	// settings
 	const unsigned int SCR_WIDTH = 1980;
 	const unsigned int SCR_HEIGHT = 1080;
+
+	namespace Time_calc
+	{
+		void update();
+		float get_delta_time();
+	};
 }
 

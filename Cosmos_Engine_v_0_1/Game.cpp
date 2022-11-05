@@ -83,13 +83,13 @@ namespace Game
 			glfwSetWindowShouldClose(window, true);
 
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Game::Time_calc::get_delta_time());
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Engine::Time_calc::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Game::Time_calc::get_delta_time());
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Engine::Time_calc::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Game::Time_calc::get_delta_time());
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Engine::Time_calc::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Game::Time_calc::get_delta_time());
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Engine::Time_calc::get_delta_time());
 	}
 
 	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
@@ -155,25 +155,6 @@ Shaders_::Shader Game::Shader_source_::create_shader()
 
 	Shaders_::Shader our_shader(camera_vs, camera_fs);
 	return our_shader;
-}
-
-namespace Game::Time_calc
-{
-	// timing
-	float deltaTime = 0.0f;	// time between current frame and last frame
-	float lastFrame = 0.0f;
-
-	void update()
-	{
-		float currentFrame = static_cast<float>(glfwGetTime());
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
-	}
-
-	float get_delta_time()
-	{
-		return deltaTime;
-	}
 }
 
 namespace Game::Last_mouse_XY
@@ -475,7 +456,7 @@ void Game::Maps_::Map_0_::map_0(Game::Win_::Window& window)
 		// per-frame time logic
 		// --------------------
 
-		Game::Time_calc::update();
+		Engine::Time_calc::update();
 
 
 		// input

@@ -19,12 +19,7 @@ namespace Game
 		Shaders_::Shader create_shader();
 	}
 
-	namespace Time_calc
-	{
-		void update();
-		float get_delta_time();
-
-	};
+	
 
 	namespace Last_mouse_XY
 	{
