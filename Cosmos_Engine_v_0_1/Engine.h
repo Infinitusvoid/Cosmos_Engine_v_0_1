@@ -82,32 +82,11 @@ namespace Engine
 		}
 	}
 	
-
-	// camera
-	Cam_::Camera* get_cam();
-	
 	namespace Models_data_
 	{
 		void add_verts(std::function<void(float, float, float, float, float)> f);
 	}
-	
 
-
-
-	namespace Time_calc
-	{
-		void update();
-		float get_delta_time();
-	};
-
-	namespace Change_XY
-	{
-		void update(double xposIn, double yposIn);
-
-		float get_x_offset();
-
-		float get_y_offset();
-	}
 
 	// glfw: whenever the window size changed (by OS or user resize) this callback function executes
 	// ---------------------------------------------------------------------------------------------
