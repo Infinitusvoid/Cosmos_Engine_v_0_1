@@ -16,25 +16,22 @@ namespace Engine
 	const unsigned int SCR_WIDTH = 1980;
 	const unsigned int SCR_HEIGHT = 1080;
 
-	namespace Win_
+	struct Window
 	{
-		struct Window
-		{
-			int width;
-			int height;
-			GLFWwindow* window;
+		int width;
+		int height;
+		GLFWwindow* window;
 
-			void init_and_configure();
+		void init_and_configure();
 
 
-			void create();
+		void create();
 
-			void capture_mouse();
+		void capture_mouse();
 
-			void clear();
+		void clear();
 
-		};
-	}
+	};
 
 	//engine components
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -343,7 +340,7 @@ namespace Engine
 
 	namespace Maps
 	{
-		void map_0(Engine::Win_::Window& window)
+		void map_0(Window& window)
 		{
 
 			std::cout << "window xxx" << std::endl;
@@ -458,10 +455,12 @@ namespace Engine
 		}
 	}
 
+	
+	
 	void run()
 	{
 		
-		Engine::Win_::Window window;
+		Window window;
 		window.width = Engine::SCR_WIDTH;
 		window.height = Engine::SCR_HEIGHT;
 		window.init_and_configure();
@@ -479,7 +478,7 @@ namespace Engine
 
 
 
-void Engine::Win_::Window::init_and_configure()
+void Engine::Window::init_and_configure()
 {
 	//glfw: initialize and configure
 	// ------------------------------
@@ -489,7 +488,7 @@ void Engine::Win_::Window::init_and_configure()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
 
-void Engine::Win_::Window::create()
+void Engine::Window::create()
 {
 	// glfw window creation
 	// --------------------
@@ -526,13 +525,13 @@ void Engine::Win_::Window::create()
 	glEnable(GL_DEPTH_TEST);
 }
 
-void Engine::Win_::Window::capture_mouse()
+void Engine::Window::capture_mouse()
 {
 	// tell GLFW to capture our mouse
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
-void Engine::Win_::Window::clear()
+void Engine::Window::clear()
 {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
