@@ -241,14 +241,7 @@ namespace Engine
 
 	namespace Maps
 	{
-		struct Entity
-		{
-			//Mesh
-			//Shade
-		};
-
 		
-
 		void map_0(Window& window)
 		{
 
