@@ -115,4 +115,13 @@ namespace Engine::Constants
 			" TexCoord = vec2(aTexCoord.x, aTexCoord.y);\n"
 			"}\n";
 	}
+
+	namespace File_Paths
+	{
+		namespace Images
+		{
+			const char* container = "Textures/container.jpg";
+			const char* awesomeface = "Textures/awesomeface.png";
+		}
+	}
 }

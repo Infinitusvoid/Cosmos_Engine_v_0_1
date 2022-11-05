@@ -273,12 +273,10 @@ namespace Engine
 
 
 			Texture texture_0;
-			const char* path_0 = "Textures/container.jpg";
-			texture_0.load_RGB(path_0);
+			texture_0.load_RGB(Constants::File_Paths::Images::container);
 
 			Texture texture_1;
-			const char* path_1 = "Textures/awesomeface.png";
-			texture_1.load_RGBA(path_1);
+			texture_1.load_RGBA(Constants::File_Paths::Images::awesomeface);
 
 			// tell opengl for each sampler to which texture unit it belongs to (only has to be done once)
 			// -------------------------------------------------------------------------------------------
