@@ -12,6 +12,10 @@
 namespace Engine
 {
 
+	// settings
+	const unsigned int SCR_WIDTH = 1980;
+	const unsigned int SCR_HEIGHT = 1080;
+
 	//engine components
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 	Change_XY change_xy(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f);
