@@ -15,11 +15,11 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
 #include <numbers>
 #include <deque>
 #include <fstream>
-#include <iostream>
+#include <functional>
+#include <memory>
 
 #include "Shader.h"
 #include "Mesh.h"
@@ -30,94 +30,18 @@
 
 #include "Texture.h"
 
-#include <functional>
 
 #include "Time_Singelton.h"
-
-#include <memory>
 
 #include "Change_XY.h"
 
 #include "Window.h"
-
-
-/*
-struct Window
-{
-	int width;
-	int height;
-	GLFWwindow* window;
-
-
-	void init_and_configure()
-	{
-		//glfw: initialize and configure
-		// ------------------------------
-		glfwInit();
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	}
-
-
-	void create()
-	{
-		// glfw window creation
-		// --------------------
-		window = glfwCreateWindow(width, height, "LearnOpenGL", NULL, NULL);
-		if (window == NULL)
-		{
-			std::cout << "Failed to create GLFW window" << std::endl;
-			glfwTerminate();
-			return;
-		}
-		glfwMakeContextCurrent(window);
-
-
-
-
-		//Set callbacks
-		//glfwSetFramebufferSizeCallback(window, Engine::framebuffer_size_callback);
-		//glfwSetCursorPosCallback(window, Engine::mouse_callback);
-		//glfwSetScrollCallback(window, Engine::scroll_callback);
-
-
-		capture_mouse();
-
-		// glad: load all OpenGL function pointers
-		// ---------------------------------------
-		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		{
-			std::cout << "Failed to initialize GLAD" << std::endl;
-			return;
-		}
-
-		// configure global opengl state
-		// -----------------------------
-		glEnable(GL_DEPTH_TEST);
-	}
-
-	void capture_mouse()
-	{
-		// tell GLFW to capture our mouse
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	}
-
-	void clear()
-	{
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	}
-
-};
-*/
+#include "Constants.h"
 
 namespace Engine
 {
 
-	// settings
-	const unsigned int SCR_WIDTH = 1980;
-	const unsigned int SCR_HEIGHT = 1080;
+	
 
 	//void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 	//void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -127,7 +51,7 @@ namespace Engine
 
 	//engine components
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-	Change_XY change_xy(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f);
+	Change_XY change_xy(Constants::SCR_WIDTH / 2.0f, Constants::SCR_HEIGHT / 2.0f);
 	Shaders_::Shader create_default_shader()
 	{
 		const char* camera_fs = "#version 330 core\n"
@@ -508,7 +432,7 @@ namespace Engine
 				our_shader.use();
 
 				// pass projection matrix to shader (note that in this case it could change every frame)
-				glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)Engine::SCR_WIDTH / (float)Engine::SCR_HEIGHT, 0.1f, 100.0f);
+				glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)Constants::SCR_WIDTH / (float)Constants::SCR_HEIGHT, 0.1f, 100.0f);
 				our_shader.setMat4("projection", projection);
 
 				// camera/view transformation
@@ -553,8 +477,8 @@ namespace Engine
 	{
 		
 		Window window;
-		window.width = Engine::SCR_WIDTH;
-		window.height = Engine::SCR_HEIGHT;
+		window.width = Constants::SCR_WIDTH;
+		window.height = Constants::SCR_HEIGHT;
 		window.init_and_configure();
 		window.create();
 
