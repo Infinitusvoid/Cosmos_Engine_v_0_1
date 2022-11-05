@@ -1,10 +1,10 @@
 #pragma once
 
-class Change_XXX
+class Change_XY
 {
 public:
 	
-	Change_XXX(float center_x, float center_y);
+	Change_XY(float center_x, float center_y);
 	
 	void update(double xposIn, double yposIn);
 	

@@ -206,7 +206,7 @@ namespace Engine
 	}
 
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-	Change_XXX change_xy(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f);
+	Change_XY change_xy(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f);
 	
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	{
