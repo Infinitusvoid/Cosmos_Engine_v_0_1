@@ -15,9 +15,6 @@ namespace Engine
 	//engine components
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 	Change_XY change_xy(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f);
-
-
-
 	Shaders_::Shader Default_shaders::create_default_shader()
 	{
 		const char* camera_fs = "#version 330 core\n"
@@ -53,6 +50,8 @@ namespace Engine
 		Shaders_::Shader our_shader(camera_vs, camera_fs);
 		return our_shader;
 	}
+
+
 
 
 	namespace Build_versions
