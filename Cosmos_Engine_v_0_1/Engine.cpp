@@ -205,58 +205,9 @@ namespace Engine
 
 	}
 
-	
-
-	
-	
-	
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-	
 	Change_XXX change_xy(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f);
-	// = Engine::SCR_WIDTH / 2.0f;
-	// = Engine::SCR_HEIGHT / 2.0f;
-	//namespace Change_XY
-	//{
-	//	float lastX = Engine::SCR_WIDTH / 2.0f;
-	//	float lastY = Engine::SCR_HEIGHT / 2.0f;
-	//	bool firstMouse = true;
-
-	//	float xoffset = 0.0f;
-	//	float yoffset = 0.0f;
-
-	//	void update(double xposIn, double yposIn)
-	//	{
-	//		float xpos = static_cast<float>(xposIn);
-	//		float ypos = static_cast<float>(yposIn);
-
-	//		if (firstMouse)
-	//		{
-	//			lastX = xpos;
-	//			lastY = ypos;
-	//			firstMouse = false;
-	//		}
-
-	//		xoffset = xpos - lastX;
-	//		yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-	//		lastX = xpos;
-	//		lastY = ypos;
-	//	}
-
-	//	float get_x_offset()
-	//	{
-	//		return xoffset;
-	//	}
-
-	//	float get_y_offset()
-	//	{
-	//		return yoffset;
-	//	}
-
-	//}
-
-
-
+	
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	{
 		std::cout << "Window width : " << width << " height : " << height << std::endl;
@@ -283,13 +234,7 @@ namespace Engine
 
 	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 	{
-		
 		change_xy.update(xposIn, yposIn);
-
-		//Engine::Change_XY::update(xposIn, yposIn);
-
-		//camera.ProcessMouseMovement(Engine::Change_XY::get_x_offset(), Engine::Change_XY::get_y_offset());
-
 		camera.ProcessMouseMovement(change_xy.get_x_offset(), change_xy.get_y_offset());
 	}
 
