@@ -4,148 +4,6 @@
 
 
 
-void Game::Build_versions::build_version_000(MeshT_::Mesh& mesh)
-{
-	//TODO make save last one rotation of data, make it not recompute what it does not have to. 
-	//Than you just connect.
-
-
-	//mesh.vertices.clear();
-
-	MeshT_::scale(mesh, 0.1f);
-
-	glm::vec3 a;
-	glm::vec3 b;
-
-
-	MeshT_::add_quad(mesh, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(1.0f, 1.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-
-	glm::vec3 direction = glm::vec3(1, 2, 3);
-	glm::vec3 s_a = glm::vec3(0, 0, 0);
-	glm::vec3 s_b = glm::vec3(0, 0, 1);
-	for (int i = 0; i < 20000; i++)
-	{
-		s_a = s_b;
-		s_b += direction;
-
-		float dx = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		float dy = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		float dz = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		direction += glm::vec3(dx - 0.5f, dy - 0.5f, dz - 0.5f) * 0.25f;
-
-		direction = glm::normalize(direction);
-
-		//direction *= 0.25f;
-		//direction *= 0.15f;
-		//build_section(mesh, s_a, s_b, 0.5f, 0.2f);
-		MeshT_::build_section(mesh, s_a, s_b, 1.0f, 1.0f);
-	}
-
-	//build_section(mesh, glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 1.0));
-	//build_section(mesh, glm::vec3(0.0, 1.0, 1.0), glm::vec3(0.0, -2.0, -5.0));
-
-
-}
-
-void Game::Build_versions::build_version_001(MeshT_::Mesh& mesh)
-{
-	mesh.vertices.clear();
-	//Engine_::Components_::Geometry_::Mesh_::scale(mesh, 0.1f);
-
-
-
-
-
-
-
-
-	Tunel_Builder_::Tunel_Builder builder(glm::vec3(0.0f, 0.0f, 0.0f), 7);
-
-	/* builder.build_to(mesh, glm::vec3(0, 0, 1), 1.0f);
-	 builder.build_to(mesh, glm::vec3(0, 0, 2),1.0f);
-
-	 builder.build_to(mesh, glm::vec3(0, 0, 4),1.0f);
-
-	 builder.build_to(mesh, glm::vec3(0, 0, 8), 1.0f);
-
-	 builder.build_to(mesh, glm::vec3(0, 3, 10), 1.0f);*/
-
-	Mover mover;
-
-	const glm::vec3 jump_position = glm::vec3(0.0f, 0.0f, 10.0f);
-
-	for (int j = 0; j < 25; j++)
-	{
-
-		mover.position = glm::vec3(0, 3, 10);
-		mover.direction = glm::vec3(1, 0, 0);
-		mover.speed = 1.0f;
-
-		builder.jump(jump_position);
-		mover.jump(jump_position);
-		mover.clear_direction();
-
-		for (int i = 0; i < 100; i++)
-		{
-			mover.move();
-			builder.build_to(mesh, mover.position, 0.25f + 0.20f * sinf(i * 0.001 * 3.1415 * 100.0f));
-			mover.randomize_direction();
-		}
-	}
-
-
-	MeshT_::export_to_file(mesh);
-
-	//build_section(mesh, glm::vec3(0, 0, 0), glm::vec3(1, 0, 0), 1.0f, 0.1f * 0.5f);
-	//build_section(mesh, glm::vec3(0, 0, 0), glm::vec3(1, 1, 0), 1.0f, 0.1f * 0.5f);
-
-}
-
-void Game::Build_versions::build_version_002(Mesh_indexed_::Mesh_indexed& mesh_indexed)
-{
-	auto rnd_position_around = [](glm::vec3 center, float radius)
-	{
-		float x = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		float y = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		float z = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-		return glm::vec3(x - 0.5f, y - 0.5f, z - 0.5f) * radius;
-	};
-
-	//mesh_indexed.clear();
-
-	Tunel_Builder_::Tunel_Builder builder(glm::vec3(0.0f, 0.0f, 0.0f), 7);
-
-	Mover mover;
-
-	glm::vec3 jump_position = glm::vec3(0.0f, 0.0f, 10.0f);
-
-	for (int j = 0; j < 25; j++)
-	{
-
-		mover.position = glm::vec3(0, 3 + 5, 10);
-		mover.direction = glm::vec3(1, 0, 0);
-		mover.speed = 1.0f;
-
-		jump_position = rnd_position_around(glm::vec3(0, 20, 0), 100.0f);
-
-		builder.jump(jump_position);
-		mover.jump(jump_position);
-
-		//mover.clear_direction();
-
-		for (int i = 0; i < 100; i++)
-		{
-			mover.move();
-			builder.build_to(mesh_indexed, mover.position, 1.0f + 0.5f * sinf(i * 0.001 * 3.1415 * 200.0f));
-			mover.randomize_direction();
-		}
-	}
-
-
-	//Engine_::Components_::Geometry_::Mesh_::export_to_file(mesh);
-	//mesh_indexed.export_to_file();
-
-}
 
 void Game::Win_::Window::init_and_configure()
 {
@@ -227,8 +85,8 @@ void Game::Maps_::Map_0_::map_0(Game::Win_::Window& window)
 
 
 	//Maps_::Map_0_::Details_::build_version_000(mesh);
-	Game::Build_versions::build_version_001(mesh);
-	Game::Build_versions::build_version_002(mesh_indexed);
+	Engine::Build_versions::build_version_001(mesh);
+	Engine::Build_versions::build_version_002(mesh_indexed);
 
 	mesh_indexed.create();
 	mesh.create();
