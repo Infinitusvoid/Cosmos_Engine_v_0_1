@@ -102,5 +102,13 @@ namespace Game
 
 	}
 
+
+	namespace Maps_
+	{
+		namespace Map_0_
+		{
+			void map_0(Game::Win_::Window& window);
+		}
+	}
 }
 
