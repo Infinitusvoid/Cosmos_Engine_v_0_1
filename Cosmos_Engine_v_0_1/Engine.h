@@ -39,7 +39,7 @@ namespace Engine
 	const unsigned int SCR_HEIGHT = 1080;
 
 	
-	namespace Shaders
+	namespace Default_shaders
 	{
 		Shaders_::Shader create_default_shader();
 	}

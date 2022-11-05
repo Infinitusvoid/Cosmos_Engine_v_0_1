@@ -7,7 +7,17 @@
 namespace Engine
 {
 	
-	Shaders_::Shader Shaders::create_default_shader()
+
+	struct Engine_components
+	{
+		Mesh_indexed_::Mesh_indexed mesh;
+		Shaders_::Shader shader;
+		Cam_::Camera camera;
+	};
+
+
+
+	Shaders_::Shader Default_shaders::create_default_shader()
 	{
 		const char* camera_fs = "#version 330 core\n"
 			"out vec4 FragColor;\n"
@@ -430,7 +440,7 @@ void Engine::Mapes::Map_0_::map_0(Engine::Win_::Window& window)
 {
 
 
-	Shaders_::Shader our_shader = Engine::Shaders::create_default_shader();
+	Shaders_::Shader our_shader = Engine::Default_shaders::create_default_shader();
 
 	MeshT_::Mesh mesh;
 
