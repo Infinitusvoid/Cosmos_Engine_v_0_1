@@ -2,6 +2,8 @@
 
 #include "Time_Singelton.h"
 
+#include <memory>
+
 namespace Engine_Data
 {
 	struct Engine_components
@@ -16,7 +18,7 @@ namespace Engine_Data
 namespace Engine
 {
 	
-
+	std::unique_ptr<Engine_Data::Engine_components> components;
 
 
 	Shaders_::Shader Default_shaders::create_default_shader()
