@@ -34,35 +34,9 @@
 
 namespace Engine
 {
-	
-
-	
 	namespace Default_shaders
 	{
 		Shaders_::Shader create_default_shader();
-	}
-
-	
-	
-
-	namespace Win_
-	{
-		struct Window
-		{
-			int width;
-			int height;
-			GLFWwindow* window;
-
-			void init_and_configure();
-
-
-			void create();
-
-			void capture_mouse();
-
-			void clear();
-
-		};
 	}
 
 	
