@@ -74,6 +74,7 @@ namespace Engine
 		};
 	}
 
+	/*
 	namespace Mapes
 	{
 		namespace Map_0_
@@ -81,7 +82,8 @@ namespace Engine
 			void map_0(Win_::Window& window);
 		}
 	}
-	
+	*/
+
 	namespace Models_data_
 	{
 		void add_verts(std::function<void(float, float, float, float, float)> f);
