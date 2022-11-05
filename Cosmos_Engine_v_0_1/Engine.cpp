@@ -145,9 +145,11 @@ namespace Engine
 
 		}
 
-		void build_version_002(Mesh_indexed_::Mesh_indexed& mesh_indexed)
+		void build_version_002(Mesh_indexed_::Mesh_indexed& mesh_indexed, int seed)
 		{
-			auto rnd_position_around = [](glm::vec3 center, float radius)
+			
+
+			auto rnd_position_around = [&seed](glm::vec3 center, float radius)
 			{
 				float x = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
 				float y = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -155,6 +157,8 @@ namespace Engine
 				return glm::vec3(x - 0.5f, y - 0.5f, z - 0.5f) * radius;
 			};
 
+
+			std::cout << "RND : " << rnd_position_around(glm::vec3(1.0, 1.0, 1.0), 1.0f).x << " \n";
 			//mesh_indexed.clear();
 
 			Tunel_Builder_::Tunel_Builder builder(glm::vec3(0.0f, 0.0f, 0.0f), 7);
@@ -237,6 +241,14 @@ namespace Engine
 
 	namespace Maps
 	{
+		struct Entity
+		{
+			//Mesh
+			//Shade
+		};
+
+		
+
 		void map_0(Window& window)
 		{
 
@@ -260,7 +272,7 @@ namespace Engine
 
 			//Maps_::Map_0_::Details_::build_version_000(mesh);
 			Engine::Build_versions::build_version_001(mesh);
-			Engine::Build_versions::build_version_002(mesh_indexed);
+			Engine::Build_versions::build_version_002(mesh_indexed, 0);
 
 			mesh_indexed.create();
 			mesh.create();
@@ -285,11 +297,41 @@ namespace Engine
 				glEnable(GL_CULL_FACE);
 			}
 
+			
+			bool generate_cycle = false;
+			int cycle = 0;
+			float last_generation_time = 0.0f;
+			Mesh_indexed_::Mesh_indexed mesh_indexed_cyclic;
 
 			// render loop
 			// -----------
 			while (!glfwWindowShouldClose(window.window))
 			{
+
+				//Testing
+				
+				if (//glfwGetKey(window.window, GLFW_KEY_G) == GLFW_PRESS 
+					(Time_Singelton::get_total_delta_time() - last_generation_time) > 0.25f
+					)
+				{
+					last_generation_time = Time_Singelton::get_total_delta_time();
+					std::cout << "Generated start";
+					if (generate_cycle)
+					{
+						generate_cycle = false;
+						std::cout << "Building : " << cycle << std::endl;
+						Mesh_indexed_::Debug::add_test_quad(mesh_indexed_cyclic);
+						Engine::Build_versions::build_version_002(mesh_indexed_cyclic, cycle);
+						cycle += 1;
+						mesh_indexed_cyclic.create();
+					}
+					else {
+						generate_cycle = true;
+						mesh_indexed_cyclic.free();
+						std::cout << "Demolition" << std::endl;
+					}
+				}
+
 				// per-frame time logic
 				// --------------------
 
@@ -334,6 +376,10 @@ namespace Engine
 				}
 				mesh_indexed.draw();
 
+				if (!generate_cycle)
+				{
+					mesh_indexed_cyclic.draw();
+				}
 				// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 				// -------------------------------------------------------------------------------
 				glfwSwapBuffers(window.window);

@@ -71,6 +71,8 @@ void Mesh_indexed_::Mesh_indexed::free()
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 	vertices.clear();
+	indeces.clear();
+	counter = -1;
 }
 
 void Mesh_indexed_::add_quad(Mesh_indexed& mesh_indexed, const glm::vec3 a, const glm::vec3 b, const glm::vec3 c, const glm::vec3 d)
