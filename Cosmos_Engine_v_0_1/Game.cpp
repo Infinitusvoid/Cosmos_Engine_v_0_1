@@ -178,8 +178,8 @@ namespace Game::Time_calc
 
 namespace Game::Last_mouse_XY
 {
-	float lastX = Game::SCR_WIDTH / 2.0f;
-	float lastY = Game::SCR_HEIGHT / 2.0f;
+	float lastX = Engine::SCR_WIDTH / 2.0f;
+	float lastY = Engine::SCR_HEIGHT / 2.0f;
 	bool firstMouse = true;
 
 	float xoffset = 0.0f;
@@ -494,7 +494,7 @@ void Game::Maps_::Map_0_::map_0(Game::Win_::Window& window)
 		our_shader.use();
 
 		// pass projection matrix to shader (note that in this case it could change every frame)
-		glm::mat4 projection = glm::perspective(glm::radians((*Game::get_cam()).Zoom), (float)Game::SCR_WIDTH / (float)Game::SCR_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians((*Game::get_cam()).Zoom), (float)Engine::SCR_WIDTH / (float)Engine::SCR_HEIGHT, 0.1f, 100.0f);
 		our_shader.setMat4("projection", projection);
 
 		// camera/view transformation
@@ -535,8 +535,8 @@ void Game::Maps_::Map_0_::map_0(Game::Win_::Window& window)
 void Game::Sandbox_::run()
 {
 	Game::Win_::Window window;
-	window.width = Game::SCR_WIDTH;
-	window.height = Game::SCR_HEIGHT;
+	window.width = Engine::SCR_WIDTH;
+	window.height = Engine::SCR_HEIGHT;
 	window.init_and_configure();
 	window.create();
 

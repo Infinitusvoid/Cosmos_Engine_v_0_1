@@ -4,9 +4,7 @@
 
 namespace Game
 {
-	// settings
-	const unsigned int SCR_WIDTH = 1980;
-	const unsigned int SCR_HEIGHT = 1080;
+	
 
 	namespace Models_data_
 	{
