@@ -148,6 +148,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Time_Singelton.cpp" />
     <ClCompile Include="Tunel_Builder.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cam.h" />
@@ -161,7 +162,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Time_Singelton.h" />
     <ClInclude Include="Tunel_Builder.h" />
-    <ClInclude Include="Windoww.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

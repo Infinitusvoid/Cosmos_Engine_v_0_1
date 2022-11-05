@@ -69,6 +69,9 @@
     <ClCompile Include="Change_XY.cpp">
       <Filter>Source Files\Engine\Self_contained</Filter>
     </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -104,7 +107,7 @@
     <ClInclude Include="Change_XY.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Windoww.h">
+    <ClInclude Include="Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
