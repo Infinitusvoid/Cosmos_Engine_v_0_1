@@ -45,12 +45,6 @@ namespace Engine
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 	Change_XY change_xy(Constants::SCR_WIDTH / 2.0f, Constants::SCR_HEIGHT / 2.0f);
 
-	/*Shaders_::Shader create_default_shader()
-	{
-		Shaders_::Shader our_shader(Constants::Shader_Default::camera_vs, Constants::Shader_Default::camera_fs);
-		return our_shader;
-	}*/
-
 
 	namespace Build_versions
 	{
