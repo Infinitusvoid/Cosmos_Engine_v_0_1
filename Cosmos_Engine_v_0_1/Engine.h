@@ -34,13 +34,6 @@
 
 namespace Engine
 {
-	namespace Default_shaders
-	{
-		Shaders_::Shader create_default_shader();
-	}
-
-	
-
 	namespace Models_data_
 	{
 		void add_verts(std::function<void(float, float, float, float, float)> f);
