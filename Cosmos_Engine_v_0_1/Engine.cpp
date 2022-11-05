@@ -2,18 +2,20 @@
 
 #include "Time_Singelton.h"
 
-
-
-namespace Engine
+namespace Engine_Data
 {
-	
-
 	struct Engine_components
 	{
 		Mesh_indexed_::Mesh_indexed mesh;
 		Shaders_::Shader shader;
 		Cam_::Camera camera;
 	};
+}
+
+
+namespace Engine
+{
+	
 
 
 
@@ -52,6 +54,9 @@ namespace Engine
 		Shaders_::Shader our_shader(camera_vs, camera_fs);
 		return our_shader;
 	}
+
+
+	
 
 	void Build_versions::build_version_000(MeshT_::Mesh& mesh)
 	{
@@ -202,11 +207,7 @@ namespace Engine
 	
 	
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-	Cam_::Camera* get_cam()
-	{
-		return &camera;
-	}
-
+	
 
 	namespace Last_mouse_XY
 	{
@@ -264,25 +265,25 @@ namespace Engine
 			glfwSetWindowShouldClose(window, true);
 
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Time_Singelton::get_delta_time());
+			camera.ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Time_Singelton::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Time_Singelton::get_delta_time());
+			camera.ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Time_Singelton::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Time_Singelton::get_delta_time());
+			camera.ProcessKeyboard(Cam_::Camera_Movement::LEFT, Time_Singelton::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Time_Singelton::get_delta_time());
+			camera.ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Time_Singelton::get_delta_time());
 	}
 
 	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 	{
 		Engine::Last_mouse_XY::update(xposIn, yposIn);
 
-		(*Engine::get_cam()).ProcessMouseMovement(Engine::Last_mouse_XY::get_x_offset(), Engine::Last_mouse_XY::get_y_offset());
+		camera.ProcessMouseMovement(Engine::Last_mouse_XY::get_x_offset(), Engine::Last_mouse_XY::get_y_offset());
 	}
 
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
-		(*Engine::get_cam()).ProcessMouseScroll(static_cast<float>(yoffset));
+		camera.ProcessMouseScroll(static_cast<float>(yoffset));
 	}
 	
 	void run()
@@ -514,11 +515,11 @@ void Engine::Mapes::Map_0_::map_0(Engine::Win_::Window& window)
 		our_shader.use();
 
 		// pass projection matrix to shader (note that in this case it could change every frame)
-		glm::mat4 projection = glm::perspective(glm::radians((*Engine::get_cam()).Zoom), (float)Engine::SCR_WIDTH / (float)Engine::SCR_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)Engine::SCR_WIDTH / (float)Engine::SCR_HEIGHT, 0.1f, 100.0f);
 		our_shader.setMat4("projection", projection);
 
 		// camera/view transformation
-		glm::mat4 view = (*Engine::get_cam()).GetViewMatrix();
+		glm::mat4 view = camera.GetViewMatrix();
 		our_shader.setMat4("view", view);
 
 		// render boxes
