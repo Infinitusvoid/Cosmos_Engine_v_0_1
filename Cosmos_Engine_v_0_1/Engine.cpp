@@ -1,5 +1,6 @@
 #include "Engine.h"
 
+#include "Time_Singelton.h"
 
 
 
@@ -185,26 +186,9 @@ namespace Engine
 
 	}
 
+	
 
-
-	namespace Time_calc
-	{
-		// timing
-		float deltaTime = 0.0f;	// time between current frame and last frame
-		float lastFrame = 0.0f;
-
-		void update()
-		{
-			float currentFrame = static_cast<float>(glfwGetTime());
-			deltaTime = currentFrame - lastFrame;
-			lastFrame = currentFrame;
-		}
-
-		float get_delta_time()
-		{
-			return deltaTime;
-		}
-	}
+	
 	
 	
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -270,13 +254,13 @@ namespace Engine
 			glfwSetWindowShouldClose(window, true);
 
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Engine::Time_calc::get_delta_time());
+			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Time_Singelton::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Engine::Time_calc::get_delta_time());
+			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Time_Singelton::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Engine::Time_calc::get_delta_time());
+			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Time_Singelton::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Engine::Time_calc::get_delta_time());
+			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Time_Singelton::get_delta_time());
 	}
 
 	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
@@ -499,7 +483,7 @@ void Engine::Mapes::Map_0_::map_0(Engine::Win_::Window& window)
 		// per-frame time logic
 		// --------------------
 
-		Engine::Time_calc::update();
+		Time_Singelton::update();
 
 
 		// input
