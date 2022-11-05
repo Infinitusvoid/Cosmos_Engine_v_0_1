@@ -12,92 +12,6 @@ namespace Sandbox_
 	
 	
 
-		
-	
-
-	
-
-	
-
-
-	
-
-	
-
-	namespace Win_
-	{
-		struct Window
-		{
-			int width;
-			int height;
-			GLFWwindow* window;
-
-			void init_and_configure()
-			{
-				//glfw: initialize and configure
-				// ------------------------------
-				glfwInit();
-				glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-				glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-				glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-			}
-
-			void create()
-			{
-				// glfw window creation
-				// --------------------
-				window = glfwCreateWindow(width, height, "LearnOpenGL", NULL, NULL);
-				if (window == NULL)
-				{
-					std::cout << "Failed to create GLFW window" << std::endl;
-					glfwTerminate();
-					return;
-				}
-				glfwMakeContextCurrent(window);
-
-
-
-
-				//Set callbacks
-				glfwSetFramebufferSizeCallback(window, Game::framebuffer_size_callback);
-				glfwSetCursorPosCallback(window, Game::mouse_callback);
-				glfwSetScrollCallback(window, Game::scroll_callback);
-
-
-				capture_mouse();
-
-				// glad: load all OpenGL function pointers
-				// ---------------------------------------
-				if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-				{
-					std::cout << "Failed to initialize GLAD" << std::endl;
-					return;
-				}
-
-				// configure global opengl state
-				// -----------------------------
-				glEnable(GL_DEPTH_TEST);
-			}
-
-			void capture_mouse()
-			{
-				// tell GLFW to capture our mouse
-				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-			}
-
-			void clear()
-			{
-				glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			}
-
-		};
-
-
-
-
-	}
-
 	
 	namespace Maps_
 	{
@@ -106,7 +20,7 @@ namespace Sandbox_
 			
 
 
-			void map_0(Win_::Window& window)
+			void map_0(Game::Win_::Window& window)
 			{
 				
 				
@@ -226,7 +140,7 @@ namespace Sandbox_
 
 	void run()
 	{
-		Win_::Window window;
+		Game::Win_::Window window;
 		window.width = Game::SCR_WIDTH;
 		window.height = Game::SCR_HEIGHT;
 		window.init_and_configure();
