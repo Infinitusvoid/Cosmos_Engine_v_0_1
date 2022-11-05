@@ -287,6 +287,7 @@ namespace Engine
 	
 	void run()
 	{
+		Engine_components engine_data;
 		Engine::Win_::Window window;
 		window.width = Engine::SCR_WIDTH;
 		window.height = Engine::SCR_HEIGHT;
