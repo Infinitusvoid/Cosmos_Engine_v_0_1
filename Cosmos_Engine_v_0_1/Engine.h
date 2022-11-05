@@ -38,6 +38,11 @@ namespace Engine
 	const unsigned int SCR_HEIGHT = 1080;
 
 	
+	namespace Shader_source_
+	{
+		Shaders_::Shader create_shader();
+	}
+
 	// camera
 	Cam_::Camera* get_cam();
 	

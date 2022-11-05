@@ -5,7 +5,41 @@
 namespace Engine
 {
 	
+	Shaders_::Shader Shader_source_::create_shader()
+	{
+		const char* camera_fs = "#version 330 core\n"
+			"out vec4 FragColor;\n"
+			"\n"
+			"in vec2 TexCoord;\n"
+			"\n"
+			"uniform sampler2D texture1;\n"
+			"uniform sampler2D texture2;\n"
+			"\n"
+			"void main()\n"
+			"{\n"
+			"FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.2);\n"
+			"}\n";
 
+
+		const char* camera_vs = "#version 330 core\n"
+			"layout (location = 0) in vec3 aPos;\n"
+			"layout (location = 1) in vec2 aTexCoord;\n"
+			"\n"
+			"out vec2 TexCoord;\n"
+			"\n"
+			"uniform mat4 model;\n"
+			"uniform mat4 view;\n"
+			"uniform mat4 projection;\n"
+			"\n"
+			"void main()\n"
+			"{\n"
+			" gl_Position = projection * view * model * vec4(aPos, 1.0f);\n"
+			" TexCoord = vec2(aTexCoord.x, aTexCoord.y);\n"
+			"}\n";
+
+		Shaders_::Shader our_shader(camera_vs, camera_fs);
+		return our_shader;
+	}
 
 
 	namespace Time_calc

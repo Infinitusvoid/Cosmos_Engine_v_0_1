@@ -4,10 +4,7 @@
 
 namespace Game
 {
-	namespace Shader_source_
-	{
-		Shaders_::Shader create_shader();
-	}
+	
 
 	namespace Build_versions
 	{
