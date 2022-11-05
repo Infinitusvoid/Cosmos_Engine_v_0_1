@@ -4,16 +4,6 @@
 
 namespace Game
 {
-	
-
-	namespace Models_data_
-	{
-		namespace D_000_
-		{
-			void add_verts(std::function<void(float, float, float, float, float)> f);
-		}
-	}
-
 	namespace Shader_source_
 	{
 		Shaders_::Shader create_shader();
