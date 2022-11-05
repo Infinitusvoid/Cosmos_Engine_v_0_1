@@ -21,14 +21,7 @@ namespace Game
 
 	
 
-	namespace Last_mouse_XY
-	{
-		void update(double xposIn, double yposIn);
-		
-		float get_x_offset();
-		
-		float get_y_offset();
-	}
+	
 
 	namespace Build_versions
 	{
@@ -42,22 +35,7 @@ namespace Game
 	
 
 
-	// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-	// ---------------------------------------------------------------------------------------------
-	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-
-	// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-	// ---------------------------------------------------------------------------------------------------------
-	void process_input(GLFWwindow* window);
 	
-	// glfw: whenever the mouse moves, this callback is called
-	// -------------------------------------------------------
-	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn);
-	
-	
-	// glfw: whenever the mouse scroll wheel scrolls, this callback is called
-	// ----------------------------------------------------------------------
-	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 	
 
 
