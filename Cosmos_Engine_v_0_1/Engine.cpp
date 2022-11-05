@@ -284,8 +284,10 @@ namespace Engine
 	{
 		(*Engine::get_cam()).ProcessMouseScroll(static_cast<float>(yoffset));
 	}
+	
 	void run()
 	{
+		Engine_components engine_data;
 		Engine::Win_::Window window;
 		window.width = Engine::SCR_WIDTH;
 		window.height = Engine::SCR_HEIGHT;
@@ -439,7 +441,7 @@ void Engine::Win_::Window::clear()
 void Engine::Mapes::Map_0_::map_0(Engine::Win_::Window& window)
 {
 
-
+	std::cout << "window xxx" << std::endl;
 	Shaders_::Shader our_shader = Engine::Default_shaders::create_default_shader();
 
 	MeshT_::Mesh mesh;
