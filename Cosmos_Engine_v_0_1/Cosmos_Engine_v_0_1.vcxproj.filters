@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Engine\Singeltons">
       <UniqueIdentifier>{f92a58b4-349d-46cd-ad4a-46dcf020a3d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Self_contained">
+      <UniqueIdentifier>{11a12511-1931-4c2b-982e-992ce0bbf418}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +66,9 @@
     <ClCompile Include="Time_Singelton.cpp">
       <Filter>Source Files\Engine\Singeltons</Filter>
     </ClCompile>
+    <ClCompile Include="Change_XXX.cpp">
+      <Filter>Source Files\Engine\Self_contained</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -93,6 +99,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Time_Singelton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Change_XXX.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

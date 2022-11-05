@@ -100,7 +100,7 @@ namespace Engine
 		float get_delta_time();
 	};
 
-	namespace Last_mouse_XY
+	namespace Change_XY
 	{
 		void update(double xposIn, double yposIn);
 

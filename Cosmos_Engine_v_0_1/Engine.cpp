@@ -3,6 +3,7 @@
 #include "Time_Singelton.h"
 
 #include <memory>
+#include "Change_XXX.h"
 
 namespace Engine_Data
 {
@@ -12,6 +13,7 @@ namespace Engine_Data
 		Shaders_::Shader shader;
 		Cam_::Camera camera;
 	};
+
 }
 
 
@@ -210,46 +212,48 @@ namespace Engine
 	
 	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 	
+	Change_XXX change_xy(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f);
+	// = Engine::SCR_WIDTH / 2.0f;
+	// = Engine::SCR_HEIGHT / 2.0f;
+	//namespace Change_XY
+	//{
+	//	float lastX = Engine::SCR_WIDTH / 2.0f;
+	//	float lastY = Engine::SCR_HEIGHT / 2.0f;
+	//	bool firstMouse = true;
 
-	namespace Last_mouse_XY
-	{
-		float lastX = Engine::SCR_WIDTH / 2.0f;
-		float lastY = Engine::SCR_HEIGHT / 2.0f;
-		bool firstMouse = true;
+	//	float xoffset = 0.0f;
+	//	float yoffset = 0.0f;
 
-		float xoffset = 0.0f;
-		float yoffset = 0.0f;
+	//	void update(double xposIn, double yposIn)
+	//	{
+	//		float xpos = static_cast<float>(xposIn);
+	//		float ypos = static_cast<float>(yposIn);
 
-		void update(double xposIn, double yposIn)
-		{
-			float xpos = static_cast<float>(xposIn);
-			float ypos = static_cast<float>(yposIn);
+	//		if (firstMouse)
+	//		{
+	//			lastX = xpos;
+	//			lastY = ypos;
+	//			firstMouse = false;
+	//		}
 
-			if (firstMouse)
-			{
-				lastX = xpos;
-				lastY = ypos;
-				firstMouse = false;
-			}
+	//		xoffset = xpos - lastX;
+	//		yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
 
-			xoffset = xpos - lastX;
-			yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+	//		lastX = xpos;
+	//		lastY = ypos;
+	//	}
 
-			lastX = xpos;
-			lastY = ypos;
-		}
+	//	float get_x_offset()
+	//	{
+	//		return xoffset;
+	//	}
 
-		float get_x_offset()
-		{
-			return xoffset;
-		}
+	//	float get_y_offset()
+	//	{
+	//		return yoffset;
+	//	}
 
-		float get_y_offset()
-		{
-			return yoffset;
-		}
-
-	}
+	//}
 
 
 
@@ -275,12 +279,18 @@ namespace Engine
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 			camera.ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Time_Singelton::get_delta_time());
 	}
+	
 
 	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 	{
-		Engine::Last_mouse_XY::update(xposIn, yposIn);
+		
+		change_xy.update(xposIn, yposIn);
 
-		camera.ProcessMouseMovement(Engine::Last_mouse_XY::get_x_offset(), Engine::Last_mouse_XY::get_y_offset());
+		//Engine::Change_XY::update(xposIn, yposIn);
+
+		//camera.ProcessMouseMovement(Engine::Change_XY::get_x_offset(), Engine::Change_XY::get_y_offset());
+
+		camera.ProcessMouseMovement(change_xy.get_x_offset(), change_xy.get_y_offset());
 	}
 
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
