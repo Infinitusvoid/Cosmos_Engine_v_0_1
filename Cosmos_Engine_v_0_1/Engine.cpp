@@ -288,7 +288,7 @@ namespace Engine
 			
 			//Deque may be better than vector we remove the last one create a new one!
 
-			const float time_between_update = 0.25f;
+			const float time_between_update = 2.0f;
 
 			float last_time_it_was_generated = 0.0f;
 
@@ -307,7 +307,13 @@ namespace Engine
 
 			bool is_time_to_update()
 			{
-				return (Time_Singelton::get_total_delta_time() - last_time_it_was_generated) > time_between_update;
+				
+				if ((Time_Singelton::get_total_delta_time() - last_time_it_was_generated) > time_between_update)
+				{
+					last_time_it_was_generated = Time_Singelton::get_total_delta_time();
+					return true;
+				}
+				return false;
 			}
 
 			void update()
