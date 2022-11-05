@@ -241,34 +241,21 @@ namespace Engine
 		{
 			void build(Mesh_indexed_::Mesh_indexed& mesh_indexed)
 			{
-
-
-				auto rnd_position_around = [](glm::vec3 center, float radius)
-				{
-					float x = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-					float y = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-					float z = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-					return glm::vec3(x - 0.5f, y - 0.5f, z - 0.5f) * radius;
-				};
-
-
-				std::cout << "RND : " << rnd_position_around(glm::vec3(1.0, 1.0, 1.0), 1.0f).x << " \n";
-				//mesh_indexed.clear();
-
 				Tunel_Builder_::Tunel_Builder builder(glm::vec3(0.0f, 0.0f, 0.0f), 7);
 
 				Mover mover;
 
 				glm::vec3 jump_position = glm::vec3(0.0f, 0.0f, 10.0f);
 
-				for (int j = 0; j < 25; j++)
-				{
+				//for (int j = 0; j < 25; j++)
+				//{
 
 					mover.position = glm::vec3(0, 3 + 5, 10);
 					mover.direction = glm::vec3(1, 0, 0);
 					mover.speed = 1.0f;
 
-					jump_position = rnd_position_around(glm::vec3(0, 20, 0), 100.0f);
+
+					jump_position = glm::vec3(0, 0, 0);// rnd_position_around(glm::vec3(0, 20, 0), 100.0f);
 
 					builder.jump(jump_position);
 					mover.jump(jump_position);
@@ -281,7 +268,7 @@ namespace Engine
 						builder.build_to(mesh_indexed, mover.position, 1.0f + 0.5f * sinf(i * 0.001 * 3.1415 * 200.0f));
 						mover.randomize_direction();
 					}
-				}
+				//}
 
 
 				//Engine_::Components_::Geometry_::Mesh_::export_to_file(mesh);
