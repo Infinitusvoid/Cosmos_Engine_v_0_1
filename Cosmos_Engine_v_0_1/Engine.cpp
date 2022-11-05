@@ -2,10 +2,11 @@
 
 
 
+
 namespace Engine
 {
 	
-	Shaders_::Shader Shader_source_::create_shader()
+	Shaders_::Shader Shaders::create_default_shader()
 	{
 		const char* camera_fs = "#version 330 core\n"
 			"out vec4 FragColor;\n"
@@ -445,7 +446,7 @@ void Engine::Mapes::Map_0_::map_0(Engine::Win_::Window& window)
 {
 
 
-	Shaders_::Shader our_shader = Engine::Shader_source_::create_shader();
+	Shaders_::Shader our_shader = Engine::Shaders::create_default_shader();
 
 	MeshT_::Mesh mesh;
 

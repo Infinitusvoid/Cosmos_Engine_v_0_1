@@ -21,12 +21,13 @@
 #include <fstream>
 #include <iostream>
 
+#include "Shader.h"
 #include "Mesh.h"
 #include "Mesh_indexed.h"
 #include "Tunel_Builder.h"
 #include "Cam.h"
 #include "Mover.h"
-#include "Shader.h"
+
 #include "Texture.h"
 
 #include <functional>
@@ -38,9 +39,9 @@ namespace Engine
 	const unsigned int SCR_HEIGHT = 1080;
 
 	
-	namespace Shader_source_
+	namespace Shaders
 	{
-		Shaders_::Shader create_shader();
+		Shaders_::Shader create_default_shader();
 	}
 
 
