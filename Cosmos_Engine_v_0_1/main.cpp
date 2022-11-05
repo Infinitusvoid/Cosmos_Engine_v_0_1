@@ -15,41 +15,14 @@ namespace Sandbox_
 		
 	
 
-	// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-	void process_input(GLFWwindow* window)
-	{
-		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-			glfwSetWindowShouldClose(window, true);
-
-		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Game::Time_calc::get_delta_time());
-		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Game::Time_calc::get_delta_time());
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Game::Time_calc::get_delta_time());
-		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Game::Time_calc::get_delta_time());
-	}
+	
 
 	
 
 
-	// glfw: whenever the mouse moves, this callback is called
-	// -------------------------------------------------------
-	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
-	{
-		Game::Last_mouse_XY::update(xposIn, yposIn);
+	
 
-		(*Game::get_cam()).ProcessMouseMovement(Game::Last_mouse_XY::get_x_offset(), Game::Last_mouse_XY::get_y_offset());
-	}
-
-	// glfw: whenever the mouse scroll wheel scrolls, this callback is called
-	// ----------------------------------------------------------------------
-	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-	{
-		(*Game::get_cam()).ProcessMouseScroll(static_cast<float>(yoffset));
-	}
+	
 
 	namespace Win_
 	{
@@ -87,8 +60,8 @@ namespace Sandbox_
 
 				//Set callbacks
 				glfwSetFramebufferSizeCallback(window, Game::framebuffer_size_callback);
-				glfwSetCursorPosCallback(window, mouse_callback);
-				glfwSetScrollCallback(window, scroll_callback);
+				glfwSetCursorPosCallback(window, Game::mouse_callback);
+				glfwSetScrollCallback(window, Game::scroll_callback);
 
 
 				capture_mouse();
@@ -195,7 +168,7 @@ namespace Sandbox_
 
 					// input
 					// -----
-					process_input(window.window);
+					Game::process_input(window.window);
 
 					// render
 					// ------

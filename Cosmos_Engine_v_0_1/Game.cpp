@@ -77,6 +77,33 @@ namespace Game
 		glViewport(0, 0, width, height);
 	}
 
+	void process_input(GLFWwindow* window)
+	{
+		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			glfwSetWindowShouldClose(window, true);
+
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Game::Time_calc::get_delta_time());
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Game::Time_calc::get_delta_time());
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Game::Time_calc::get_delta_time());
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Game::Time_calc::get_delta_time());
+	}
+
+	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
+	{
+		Game::Last_mouse_XY::update(xposIn, yposIn);
+
+		(*Game::get_cam()).ProcessMouseMovement(Game::Last_mouse_XY::get_x_offset(), Game::Last_mouse_XY::get_y_offset());
+	}
+
+	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+	{
+		(*Game::get_cam()).ProcessMouseScroll(static_cast<float>(yoffset));
+	}
+
 }
 
 void Game::Models_data_::D_000_::add_verts(std::function<void(float, float, float, float, float)> f)
