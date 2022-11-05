@@ -161,6 +161,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Time_Singelton.h" />
     <ClInclude Include="Tunel_Builder.h" />
+    <ClInclude Include="Windoww.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
