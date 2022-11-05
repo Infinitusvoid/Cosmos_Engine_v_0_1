@@ -32,15 +32,7 @@ namespace Sandbox_
 			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Game::Time_calc::get_delta_time());
 	}
 
-	// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-	// ---------------------------------------------------------------------------------------------
-	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-	{
-		std::cout << "Window width : " << width << " height : " << height << std::endl;
-		// make sure the viewport matches the new window dimensions; note that width and 
-		// height will be significantly larger than specified on retina displays.
-		glViewport(0, 0, width, height);
-	}
+	
 
 
 	// glfw: whenever the mouse moves, this callback is called
@@ -94,7 +86,7 @@ namespace Sandbox_
 
 
 				//Set callbacks
-				glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+				glfwSetFramebufferSizeCallback(window, Game::framebuffer_size_callback);
 				glfwSetCursorPosCallback(window, mouse_callback);
 				glfwSetScrollCallback(window, scroll_callback);
 

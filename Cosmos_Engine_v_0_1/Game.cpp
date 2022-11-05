@@ -69,6 +69,14 @@ namespace Game
 		return &camera;
 	}
 
+	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+	{
+		std::cout << "Window width : " << width << " height : " << height << std::endl;
+		// make sure the viewport matches the new window dimensions; note that width and 
+		// height will be significantly larger than specified on retina displays.
+		glViewport(0, 0, width, height);
+	}
+
 }
 
 void Game::Models_data_::D_000_::add_verts(std::function<void(float, float, float, float, float)> f)
