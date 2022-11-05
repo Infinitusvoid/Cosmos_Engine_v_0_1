@@ -39,9 +39,8 @@ namespace Game
 		void build_version_002(Mesh_indexed_::Mesh_indexed& mesh_indexed);
 	}
 
-	// camera
+	
 
-	Cam_::Camera* get_cam();
 
 	// glfw: whenever the window size changed (by OS or user resize) this callback function executes
 	// ---------------------------------------------------------------------------------------------

@@ -23,4 +23,11 @@ namespace Engine
 		}
 	}
 	
+	
+	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+	Cam_::Camera* get_cam()
+	{
+		return &camera;
+	}
+
 }

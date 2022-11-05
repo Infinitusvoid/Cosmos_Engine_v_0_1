@@ -62,12 +62,9 @@ namespace Game
 		glm::vec3(-1.3f,  1.0f, -1.5f)
 	};
 
-	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+	
 
-	Cam_::Camera* get_cam()
-	{
-		return &camera;
-	}
+	
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	{
@@ -83,25 +80,25 @@ namespace Game
 			glfwSetWindowShouldClose(window, true);
 
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Engine::Time_calc::get_delta_time());
+			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Engine::Time_calc::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Engine::Time_calc::get_delta_time());
+			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Engine::Time_calc::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Engine::Time_calc::get_delta_time());
+			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Engine::Time_calc::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Engine::Time_calc::get_delta_time());
+			(*Engine::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Engine::Time_calc::get_delta_time());
 	}
 
 	void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 	{
 		Game::Last_mouse_XY::update(xposIn, yposIn);
 
-		(*Game::get_cam()).ProcessMouseMovement(Game::Last_mouse_XY::get_x_offset(), Game::Last_mouse_XY::get_y_offset());
+		(*Engine::get_cam()).ProcessMouseMovement(Game::Last_mouse_XY::get_x_offset(), Game::Last_mouse_XY::get_y_offset());
 	}
 
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
-		(*Game::get_cam()).ProcessMouseScroll(static_cast<float>(yoffset));
+		(*Engine::get_cam()).ProcessMouseScroll(static_cast<float>(yoffset));
 	}
 
 }
@@ -475,11 +472,11 @@ void Game::Maps_::Map_0_::map_0(Game::Win_::Window& window)
 		our_shader.use();
 
 		// pass projection matrix to shader (note that in this case it could change every frame)
-		glm::mat4 projection = glm::perspective(glm::radians((*Game::get_cam()).Zoom), (float)Engine::SCR_WIDTH / (float)Engine::SCR_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians((*Engine::get_cam()).Zoom), (float)Engine::SCR_WIDTH / (float)Engine::SCR_HEIGHT, 0.1f, 100.0f);
 		our_shader.setMat4("projection", projection);
 
 		// camera/view transformation
-		glm::mat4 view = (*Game::get_cam()).GetViewMatrix();
+		glm::mat4 view = (*Engine::get_cam()).GetViewMatrix();
 		our_shader.setMat4("view", view);
 
 		// render boxes
