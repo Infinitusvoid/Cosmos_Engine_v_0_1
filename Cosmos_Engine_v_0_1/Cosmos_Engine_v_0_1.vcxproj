@@ -137,7 +137,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\OpenGL_Exploring_and_learning\EV_0\glad.c" />
     <ClCompile Include="Cam.cpp" />
-    <ClCompile Include="Change_XXX.cpp" />
+    <ClCompile Include="Change_XY.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
@@ -151,7 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cam.h" />
-    <ClInclude Include="Change_XXX.h" />
+    <ClInclude Include="Change_XY.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Mesh.h" />

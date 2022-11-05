@@ -66,7 +66,7 @@
     <ClCompile Include="Time_Singelton.cpp">
       <Filter>Source Files\Engine\Singeltons</Filter>
     </ClCompile>
-    <ClCompile Include="Change_XXX.cpp">
+    <ClCompile Include="Change_XY.cpp">
       <Filter>Source Files\Engine\Self_contained</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,7 +101,7 @@
     <ClInclude Include="Time_Singelton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Change_XXX.h">
+    <ClInclude Include="Change_XY.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
