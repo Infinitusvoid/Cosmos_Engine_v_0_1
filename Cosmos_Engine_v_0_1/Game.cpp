@@ -1,18 +1,5 @@
 #include "Game.h"
 
-namespace Game
-{
-
-	
-	
-
-	
-
-	
-
-}
-
-
 Shaders_::Shader Game::Shader_source_::create_shader()
 {
 	const char* camera_fs = "#version 330 core\n"
