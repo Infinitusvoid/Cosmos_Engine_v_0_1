@@ -21,13 +21,8 @@ namespace Game
 	{
 		namespace D_000_
 		{
-
-			
-
 			void add_verts(std::function<void(float, float, float, float, float)> f);
-			
 		}
-
 	}
 
 	namespace Shader_source_
