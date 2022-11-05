@@ -79,15 +79,8 @@ namespace Engine
 
 				direction = glm::normalize(direction);
 
-				//direction *= 0.25f;
-				//direction *= 0.15f;
-				//build_section(mesh, s_a, s_b, 0.5f, 0.2f);
 				MeshT_::build_section(mesh, s_a, s_b, 1.0f, 1.0f);
 			}
-
-			//build_section(mesh, glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 1.0));
-			//build_section(mesh, glm::vec3(0.0, 1.0, 1.0), glm::vec3(0.0, -2.0, -5.0));
-
 
 		}
 
@@ -246,9 +239,53 @@ namespace Engine
 		struct Tunel_Manager
 		{
 			std::vector<Mesh_indexed_::Mesh_indexed> meshes;
+			
+			Mesh_indexed_::Mesh_indexed foo_mesh;
 			//Something like build_version_002 will be embeded into it.
 			
 			//Deque may be better than vector we remove the last one create a new one!
+
+			const float time_between_update = 0.25f;
+
+			float last_time_it_was_generated = 0.0f;
+
+			bool should_generate = true;
+
+			int cycle = 0;
+
+			void update()
+			{
+				if (
+					(Time_Singelton::get_total_delta_time() - last_time_it_was_generated) > time_between_update
+					)
+				{
+					last_time_it_was_generated = Time_Singelton::get_total_delta_time();
+					std::cout << "Tunel_Manager -> ";
+					if (should_generate)
+					{
+						should_generate = false;
+						std::cout << "Building : " << cycle << std::endl;
+						Mesh_indexed_::Debug::add_test_quad(foo_mesh);
+						Engine::Build_versions::build_version_002(foo_mesh, cycle);
+						cycle += 1;
+						foo_mesh.create();
+					}
+					else {
+						should_generate = true;
+						foo_mesh.free();
+						std::cout << "Demolition" << std::endl;
+					}
+				}
+
+			}
+
+			void draw()
+			{
+				if (!should_generate) // we should change this and generate new mesh when deleting the old one.
+				{
+					foo_mesh.draw();
+				}
+			}
 		};
 
 		void map_0(Window& window)
@@ -300,44 +337,50 @@ namespace Engine
 			}
 
 			
-			bool generate_cycle = false;
-			int cycle = 0;
-			float last_generation_time = 0.0f;
-			Mesh_indexed_::Mesh_indexed mesh_indexed_cyclic;
+			Tunel_Manager tunel_man;
+			//bool generate_cycle = false;
+			//int cycle = 0;
+			//float last_generation_time = 0.0f;
+			//Mesh_indexed_::Mesh_indexed mesh_indexed_cyclic;
 
 			// render loop
 			// -----------
 			while (!glfwWindowShouldClose(window.window))
 			{
 
-				//Testing
 				
-				if (//glfwGetKey(window.window, GLFW_KEY_G) == GLFW_PRESS 
-					(Time_Singelton::get_total_delta_time() - last_generation_time) > 0.25f
-					)
-				{
-					last_generation_time = Time_Singelton::get_total_delta_time();
-					std::cout << "Generated start";
-					if (generate_cycle)
-					{
-						generate_cycle = false;
-						std::cout << "Building : " << cycle << std::endl;
-						Mesh_indexed_::Debug::add_test_quad(mesh_indexed_cyclic);
-						Engine::Build_versions::build_version_002(mesh_indexed_cyclic, cycle);
-						cycle += 1;
-						mesh_indexed_cyclic.create();
-					}
-					else {
-						generate_cycle = true;
-						mesh_indexed_cyclic.free();
-						std::cout << "Demolition" << std::endl;
-					}
-				}
+				
 
 				// per-frame time logic
 				// --------------------
 
 				Time_Singelton::update();
+
+
+				//Testing
+
+				//if (//glfwGetKey(window.window, GLFW_KEY_G) == GLFW_PRESS 
+				//	(Time_Singelton::get_total_delta_time() - last_generation_time) > 0.25f
+				//	)
+				//{
+				//	last_generation_time = Time_Singelton::get_total_delta_time();
+				//	std::cout << "Generated start";
+				//	if (generate_cycle)
+				//	{
+				//		generate_cycle = false;
+				//		std::cout << "Building : " << cycle << std::endl;
+				//		Mesh_indexed_::Debug::add_test_quad(mesh_indexed_cyclic);
+				//		Engine::Build_versions::build_version_002(mesh_indexed_cyclic, cycle);
+				//		cycle += 1;
+				//		mesh_indexed_cyclic.create();
+				//	}
+				//	else {
+				//		generate_cycle = true;
+				//		mesh_indexed_cyclic.free();
+				//		std::cout << "Demolition" << std::endl;
+				//	}
+				//}
+				tunel_man.update();
 
 
 				// input
@@ -378,10 +421,8 @@ namespace Engine
 				}
 				mesh_indexed.draw();
 
-				if (!generate_cycle)
-				{
-					mesh_indexed_cyclic.draw();
-				}
+				tunel_man.draw();
+
 				// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 				// -------------------------------------------------------------------------------
 				glfwSwapBuffers(window.window);
