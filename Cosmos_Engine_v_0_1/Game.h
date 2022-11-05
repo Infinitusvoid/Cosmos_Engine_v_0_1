@@ -54,5 +54,11 @@ namespace Game
 		
 		void build_version_002(Mesh_indexed_::Mesh_indexed& mesh_indexed);
 	}
+
+	// camera
+
+	Cam_::Camera* get_cam();
+
+	
 }
 

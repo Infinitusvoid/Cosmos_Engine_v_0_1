@@ -9,8 +9,7 @@
 
 namespace Sandbox_
 {
-	// camera
-	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+	
 	
 
 		
@@ -24,13 +23,13 @@ namespace Sandbox_
 			glfwSetWindowShouldClose(window, true);
 
 		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			camera.ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Game::Time_calc::get_delta_time());
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::FORWARD, Game::Time_calc::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			camera.ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Game::Time_calc::get_delta_time());
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::BACKWARD, Game::Time_calc::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			camera.ProcessKeyboard(Cam_::Camera_Movement::LEFT, Game::Time_calc::get_delta_time());
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::LEFT, Game::Time_calc::get_delta_time());
 		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			camera.ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Game::Time_calc::get_delta_time());
+			(*Game::get_cam()).ProcessKeyboard(Cam_::Camera_Movement::RIGHT, Game::Time_calc::get_delta_time());
 	}
 
 	// glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -50,14 +49,14 @@ namespace Sandbox_
 	{
 		Game::Last_mouse_XY::update(xposIn, yposIn);
 
-		camera.ProcessMouseMovement(Game::Last_mouse_XY::get_x_offset(), Game::Last_mouse_XY::get_y_offset());
+		(*Game::get_cam()).ProcessMouseMovement(Game::Last_mouse_XY::get_x_offset(), Game::Last_mouse_XY::get_y_offset());
 	}
 
 	// glfw: whenever the mouse scroll wheel scrolls, this callback is called
 	// ----------------------------------------------------------------------
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
-		camera.ProcessMouseScroll(static_cast<float>(yoffset));
+		(*Game::get_cam()).ProcessMouseScroll(static_cast<float>(yoffset));
 	}
 
 	namespace Win_
@@ -218,11 +217,11 @@ namespace Sandbox_
 					our_shader.use();
 
 					// pass projection matrix to shader (note that in this case it could change every frame)
-					glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)Game::SCR_WIDTH / (float)Game::SCR_HEIGHT, 0.1f, 100.0f);
+					glm::mat4 projection = glm::perspective(glm::radians((*Game::get_cam()).Zoom), (float)Game::SCR_WIDTH / (float)Game::SCR_HEIGHT, 0.1f, 100.0f);
 					our_shader.setMat4("projection", projection);
 
 					// camera/view transformation
-					glm::mat4 view = camera.GetViewMatrix();
+					glm::mat4 view = (*Game::get_cam()).GetViewMatrix();
 					our_shader.setMat4("view", view);
 
 					// render boxes

@@ -62,6 +62,13 @@ namespace Game
 		glm::vec3(-1.3f,  1.0f, -1.5f)
 	};
 
+	Cam_::Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+
+	Cam_::Camera* get_cam()
+	{
+		return &camera;
+	}
+
 }
 
 void Game::Models_data_::D_000_::add_verts(std::function<void(float, float, float, float, float)> f)
