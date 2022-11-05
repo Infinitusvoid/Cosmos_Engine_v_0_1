@@ -124,5 +124,8 @@ namespace Engine
 	// glfw: whenever the mouse scroll wheel scrolls, this callback is called
 	// ----------------------------------------------------------------------
 	void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+
+
+	void run();
 }
 

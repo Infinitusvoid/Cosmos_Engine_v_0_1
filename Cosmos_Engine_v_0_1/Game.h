@@ -4,11 +4,6 @@
 
 namespace Game
 {
-	
-	
-
-	
-
 	namespace Sandbox_
 	{
 		void run();
