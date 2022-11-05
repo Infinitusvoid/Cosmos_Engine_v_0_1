@@ -236,10 +236,66 @@ namespace Engine
 	{
 		
 		//TODO
+
+		struct Tunel_Builder
+		{
+			void build_version_002(Mesh_indexed_::Mesh_indexed& mesh_indexed, int seed)
+			{
+
+
+				auto rnd_position_around = [&seed](glm::vec3 center, float radius)
+				{
+					float x = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+					float y = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+					float z = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+					return glm::vec3(x - 0.5f, y - 0.5f, z - 0.5f) * radius;
+				};
+
+
+				std::cout << "RND : " << rnd_position_around(glm::vec3(1.0, 1.0, 1.0), 1.0f).x << " \n";
+				//mesh_indexed.clear();
+
+				Tunel_Builder_::Tunel_Builder builder(glm::vec3(0.0f, 0.0f, 0.0f), 7);
+
+				Mover mover;
+
+				glm::vec3 jump_position = glm::vec3(0.0f, 0.0f, 10.0f);
+
+				for (int j = 0; j < 25; j++)
+				{
+
+					mover.position = glm::vec3(0, 3 + 5, 10);
+					mover.direction = glm::vec3(1, 0, 0);
+					mover.speed = 1.0f;
+
+					jump_position = rnd_position_around(glm::vec3(0, 20, 0), 100.0f);
+
+					builder.jump(jump_position);
+					mover.jump(jump_position);
+
+					//mover.clear_direction();
+
+					for (int i = 0; i < 100; i++)
+					{
+						mover.move();
+						builder.build_to(mesh_indexed, mover.position, 1.0f + 0.5f * sinf(i * 0.001 * 3.1415 * 200.0f));
+						mover.randomize_direction();
+					}
+				}
+
+
+				//Engine_::Components_::Geometry_::Mesh_::export_to_file(mesh);
+				//mesh_indexed.export_to_file();
+
+			}
+		};
+
 		struct Tunel_Manager
 		{
 			std::vector<Mesh_indexed_::Mesh_indexed> meshes;
 			
+			std::deque<Mesh_indexed_::Mesh_indexed> q_meshes;
+
 			Mesh_indexed_::Mesh_indexed foo_mesh;
 			//Something like build_version_002 will be embeded into it.
 			
@@ -253,37 +309,79 @@ namespace Engine
 
 			int cycle = 0;
 
+			const int max_elements = 10;
+
+			bool is_time_to_update()
+			{
+				return (Time_Singelton::get_total_delta_time() - last_time_it_was_generated) > time_between_update;
+			}
+
 			void update()
 			{
-				if (
-					(Time_Singelton::get_total_delta_time() - last_time_it_was_generated) > time_between_update
-					)
+
+
+				if (!is_time_to_update())
 				{
-					last_time_it_was_generated = Time_Singelton::get_total_delta_time();
-					std::cout << "Tunel_Manager -> ";
-					if (should_generate)
-					{
-						should_generate = false;
-						std::cout << "Building : " << cycle << std::endl;
-						Mesh_indexed_::Debug::add_test_quad(foo_mesh);
-						Engine::Build_versions::build_version_002(foo_mesh, cycle);
-						cycle += 1;
-						foo_mesh.create();
-					}
-					else {
-						should_generate = true;
-						foo_mesh.free();
-						std::cout << "Demolition" << std::endl;
-					}
+					return;
 				}
+
+
+				if (q_meshes.size() < max_elements)
+				{
+					q_meshes.push_back(Mesh_indexed_::Mesh_indexed());
+					Mesh_indexed_::Debug::add_test_quad(q_meshes.back());
+					cycle += 1;
+					Engine::Build_versions::build_version_002(q_meshes.back(), cycle); //now i need the new one of  this that it contine building where it stoped
+					q_meshes.back().create();
+				}
+				else {
+					q_meshes.front().free();
+					q_meshes.pop_front();
+				}
+
+
+				//if (
+				//	(Time_Singelton::get_total_delta_time() - last_time_it_was_generated) > time_between_update
+				//	)
+				//{
+				//	last_time_it_was_generated = Time_Singelton::get_total_delta_time();
+				//	std::cout << "Tunel_Manager -> ";
+				//	if (should_generate)
+				//	{
+				//		should_generate = false;
+				//		std::cout << "Building : " << cycle << std::endl;
+
+				//		if (q_meshes.size() < max_elements)
+				//		{
+				//			q_meshes.push_back(Mesh_indexed_::Mesh_indexed());
+				//			Mesh_indexed_::Debug::add_test_quad(q_meshes.back());
+				//			cycle += 1;
+				//			Engine::Build_versions::build_version_002(q_meshes.back(), cycle);
+				//			q_meshes.back().create();
+				//		}
+				//		else {
+				//			q_meshes.front().free();
+				//		}
+
+				//		Mesh_indexed_::Debug::add_test_quad(foo_mesh);
+				//		Engine::Build_versions::build_version_002(foo_mesh, cycle);
+				//		cycle += 1;
+				//		foo_mesh.create();
+				//	}
+				//	else {
+				//		should_generate = true;
+				//		foo_mesh.free();
+				//		std::cout << "Demolition" << std::endl;
+				//	}
+				//}
 
 			}
 
 			void draw()
 			{
-				if (!should_generate) // we should change this and generate new mesh when deleting the old one.
+				for (int i = 0; i < q_meshes.size(); i++)
 				{
-					foo_mesh.draw();
+					q_meshes[i].draw();
 				}
 			}
 		};
