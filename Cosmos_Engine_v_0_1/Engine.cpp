@@ -242,6 +242,15 @@ namespace Engine
 	namespace Maps
 	{
 		
+		//TODO
+		struct Tunel_Manager
+		{
+			std::vector<Mesh_indexed_::Mesh_indexed> meshes;
+			//Something like build_version_002 will be embeded into it.
+			
+			//Deque may be better than vector we remove the last one create a new one!
+		};
+
 		void map_0(Window& window)
 		{
 
