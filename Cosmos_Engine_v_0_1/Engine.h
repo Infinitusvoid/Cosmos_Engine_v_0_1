@@ -34,11 +34,7 @@
 
 namespace Engine
 {
-	namespace Models_data_
-	{
-		void add_verts(std::function<void(float, float, float, float, float)> f);
-	}
-
+	
 	void run();
 }
 
