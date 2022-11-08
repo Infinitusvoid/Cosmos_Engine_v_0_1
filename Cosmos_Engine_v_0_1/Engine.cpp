@@ -241,38 +241,12 @@ namespace Engine
 		{
 			void build(Mesh_indexed_::Mesh_indexed& mesh_indexed)
 			{
+				//TODO Tunel_Builder is not working as it should create a new one.
 				Tunel_Builder_::Tunel_Builder builder(glm::vec3(0.0f, 0.0f, 0.0f), 7);
 
-				Mover mover;
-
-				glm::vec3 jump_position = glm::vec3(0.0f, 0.0f, 10.0f);
-
-				//for (int j = 0; j < 25; j++)
-				//{
-
-					mover.position = glm::vec3(0, 3 + 5, 10);
-					mover.direction = glm::vec3(1, 0, 0);
-					mover.speed = 1.0f;
-
-
-					jump_position = glm::vec3(0, 0, 0);// rnd_position_around(glm::vec3(0, 20, 0), 100.0f);
-
-					builder.jump(jump_position);
-					mover.jump(jump_position);
-
-					//mover.clear_direction();
-
-					for (int i = 0; i < 100; i++)
-					{
-						mover.move();
-						builder.build_to(mesh_indexed, mover.position, 1.0f + 0.5f * sinf(i * 0.001 * 3.1415 * 200.0f));
-						mover.randomize_direction();
-					}
-				//}
-
-
-				//Engine_::Components_::Geometry_::Mesh_::export_to_file(mesh);
-				//mesh_indexed.export_to_file();
+				builder.build_to(mesh_indexed, glm::vec3(0, 0, 1) , 1.0f);
+				builder.build_to(mesh_indexed, glm::vec3(0, 0, 2), 1.0f);
+					
 
 			}
 		};
