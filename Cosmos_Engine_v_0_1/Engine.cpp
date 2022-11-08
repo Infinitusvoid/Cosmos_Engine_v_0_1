@@ -543,25 +543,25 @@ namespace Engine
 	void run()
 	{
 		
+		// Initialize window
 		Window window;
 		window.width = Constants::SCR_WIDTH;
 		window.height = Constants::SCR_HEIGHT;
 		window.init_and_configure();
 		window.create();
 
+		// Set Callbacks
 		glfwSetFramebufferSizeCallback(window.window, Engine::framebuffer_size_callback);
 		glfwSetCursorPosCallback(window.window, Engine::mouse_callback);
 		glfwSetScrollCallback(window.window, Engine::scroll_callback);
 
-		//glfwSetFramebufferSizeCallback(window, Engine::framebuffer_size_callback);
-		//glfwSetCursorPosCallback(window, Engine::mouse_callback);
-		//glfwSetScrollCallback(window, Engine::scroll_callback);
 
 		//scene_0(window);
 		Maps::map_0(window);
 
+
 		// glfw: terminate, clearing all previously allocated GLFW resources.
-	// ------------------------------------------------------------------
+		// ------------------------------------------------------------------
 		glfwTerminate();
 	}
 		
